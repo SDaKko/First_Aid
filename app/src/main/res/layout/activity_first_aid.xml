@@ -28,8 +28,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="10dp"
             android:paddingBottom="20dp"
-            android:text="Заголовок 1"
-            android:textColor="#000000"
+            android:text="@string/title"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10dp"
             android:paddingBottom="20dp"
-            android:text="Текст инструкции по оказанию первой помощи"
+            android:text="@string/instruction_text"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -57,7 +57,7 @@
         android:id="@+id/top_toolbar"
         android:layout_width="409dp"
         android:layout_height="48dp"
-        android:background="#2196F3"
+        android:background="@color/common_background_toolbar"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -65,23 +65,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/back_button_48" />
-
-        <TextView
-            android:id="@+id/textViewFirstAid2"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:text="Первая Помощь"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
+            android:layout_weight="1"
+            app:contentInsetStart="0dp">
+
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/back_button_48" />
+
+            <TextView
+                android:id="@+id/textViewFirstAid2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:text="@string/first_aid"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="26sp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
 
 

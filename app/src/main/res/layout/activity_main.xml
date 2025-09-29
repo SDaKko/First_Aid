@@ -27,8 +27,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="10dp"
-            android:text="Выберите отрасль из списка:"
-            android:textColor="#000000"
+            android:text="@string/choice"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
@@ -45,8 +45,8 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:onClick="goToSecondActivity"
-            android:text="Преподаватель"
-            android:textColor="#2196F3"
+            android:text="@string/teacher"
+            android:textColor="@color/blue_text"
             android:textSize="18sp" />
 
         <TextView
@@ -62,8 +62,8 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:onClick="goToSecondActivity"
-            android:text="Врач"
-            android:textColor="#2196F3"
+            android:text="@string/doctor"
+            android:textColor="@color/blue_text"
             android:textSize="18sp" />
 
         <TextView
@@ -79,8 +79,8 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:onClick="goToSecondActivity"
-            android:text="Компьютерный мастер"
-            android:textColor="#2196F3"
+            android:text="@string/comp_master"
+            android:textColor="@color/blue_text"
             android:textSize="18sp" />
 
         <TextView
@@ -96,8 +96,8 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:onClick="goToSecondActivity"
-            android:text="Водитель общественного транспорта"
-            android:textColor="#2196F3"
+            android:text="@string/driver"
+            android:textColor="@color/blue_text"
             android:textSize="18sp" />
 
         <TextView
@@ -113,8 +113,8 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:onClick="goToSecondActivity"
-            android:text="Универсальные инструкции"
-            android:textColor="#2196F3"
+            android:text="@string/universal"
+            android:textColor="@color/blue_text"
             android:textSize="18sp" />
 
         <View
@@ -132,7 +132,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#2196F3"
+        android:background="@color/common_background_toolbar"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -140,22 +140,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="5dp"
-            android:text="Список отраслей"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
+            app:contentInsetStart="0dp">
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:backgroundTint="@android:color/transparent"
-            app:srcCompat="@android:drawable/ic_dialog_info" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Список отраслей"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="26sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:backgroundTint="@android:color/transparent"
+                app:srcCompat="@android:drawable/ic_dialog_info" />
+
+        </androidx.appcompat.widget.Toolbar>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

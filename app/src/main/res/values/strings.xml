@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">First_Aid</string>
+    <string name="incidents">Инциденты</string>
+    <string name="incident_1">Инцидент 1</string>
+    <string name="incident_2">Инцидент 2</string>
+    <string name="incident_3">Инцидент 3</string>
+    <string name="choice">Выберите отрасль из списка:</string>
+    <string name="teacher">Преподаватель</string>
+    <string name="doctor">Врач</string>
+    <string name="comp_master">Компьютерный мастер</string>
+    <string name="driver">Водитель общественного транспорта</string>
+    <string name="universal">Универсальные инструкции</string>
+    <string name="title">Заголовок 1</string>
+    <string name="first_aid">Первая Помощь</string>
+    <string name="instruction_text">Текст инструкции по оказанию первой помощи</string>
 </resources>

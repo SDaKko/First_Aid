@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Incidents">
+    <item
+        android:id="@+id/language"
+        android:title="Язык"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionR"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="2" />
+
+    <item
+        android:id="@+id/actionS"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="3" />
+
+    <item
+        android:id="@+id/actionQ"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="4" />
+</menu>
+

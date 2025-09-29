@@ -2,12 +2,15 @@ package com.example.first_aid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -30,6 +33,9 @@ public class Incidents extends AppCompatActivity {
             return insets;
         });
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         incidentsList = new ArrayList<>();
 
         incidentsList.add(new Incident("Инцидент 1",
@@ -41,6 +47,14 @@ public class Incidents extends AppCompatActivity {
 
         setupIncidentViews();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.incidents_menu, menu);
+        return true;
+    }
+
 
     public void goToFirstActivity(View v){
         Intent intent = new Intent(this, MainActivity.class);
