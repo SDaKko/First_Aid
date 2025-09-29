@@ -91,13 +91,15 @@
             android:layout_weight="1"
             app:contentInsetStart="0dp">
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:onClick="goToFirstActivity"
-                    app:srcCompat="@drawable/back_button_48" />
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:onClick="goToFirstActivity"
+                android:scaleType="center"
+                android:contentDescription="@string/back"
+                app:srcCompat="@drawable/back_button_48" />
 
                 <TextView
                     android:id="@+id/textViewFirstAid2"
