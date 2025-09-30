@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">First_Aid</string>
+    <string name="industries_list">List of Industries</string>
+    <string name="back">Back</string>
+    <string name="incidents">Incidents</string>
+    <string name="incident_1">Incident 1</string>
+    <string name="incident_2">Incident 2</string>
+    <string name="incident_3">Incident 3</string>
+    <string name="choice">Choose a field from the list:</string>
+    <string name="teacher">Teacher</string>
+    <string name="doctor">Doctor</string>
+    <string name="comp_master">Computer Technician</string>
+    <string name="driver">Public Transport Driver</string>
+    <string name="universal">Universal Instructions</string>
+    <string name="title">Title 1</string>
+    <string name="first_aid">First Aid</string>
+    <string name="instruction_text">First aid instruction text</string>
+    <string name="language">Language</string>
+    <string name="russian">Russian</string>
+    <string name="english">English</string>
+    <string name="change_language">Change language</string>
+    <string name="cut_description">Hand cut - clean the wound, apply antiseptic, apply a bandage</string>
+    <string name="burn_description">Burn - cool the burn area, apply anti-burn ointment, apply sterile dressing</string>
+    <string name="fracture_description">Fracture - immobilize the limb, apply cold, take to trauma center</string>
+</resources>

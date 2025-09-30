@@ -1,15 +1,17 @@
 package com.example.first_aid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Incidents extends AppCompatActivity {
+public class Incidents extends BaseActivity {
 
     List<Incident> incidentsList;
 
@@ -38,12 +40,12 @@ public class Incidents extends AppCompatActivity {
 
         incidentsList = new ArrayList<>();
 
-        incidentsList.add(new Incident("Инцидент 1",
-                "Порез руки - промыть рану, обработать антисептиком, наложить повязку", R.id.incident1));
-        incidentsList.add(new Incident("Инцидент 2",
-                "Ожог - охладить место ожога, нанести противоожоговую мазь, наложить стерильную повязку", R.id.incident2));
-        incidentsList.add(new Incident("Инцидент 3",
-                "Перелом - обездвижить конечность, приложить холод, доставить в травмпункт", R.id.incident3));
+        incidentsList.add(new Incident(getString(R.string.incident_1),
+                getString(R.string.cut_description), R.id.incident1));
+        incidentsList.add(new Incident(getString(R.string.incident_2),
+                getString(R.string.burn_description), R.id.incident2));
+        incidentsList.add(new Incident(getString(R.string.incident_3),
+                getString(R.string.fracture_description), R.id.incident3));
 
         setupIncidentViews();
     }
@@ -54,6 +56,45 @@ public class Incidents extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.incidents_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.language_russian) {
+            setLanguage("ru");
+            return true;
+        } else if (id == R.id.language_english) {
+            setLanguage("en");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setLanguage(String languageCode) {
+        SharedPreferences preferences = getSharedPreferences("Settings", MODE_PRIVATE);
+
+        String currentLanguage = preferences.getString("app_language", "ru");
+        if (currentLanguage.equals(languageCode)) {
+            Toast.makeText(this,
+                    languageCode.equals("en") ? "Language is already English" : "Язык уже русский",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("app_language", languageCode);
+        editor.apply();
+
+
+        // ПЕРЕЗАГРУЖАЕМ ТОЛЬКО ТЕКУЩУЮ АКТИВНОСТЬ
+        Intent intent = new Intent(this, Incidents.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); // Без анимации
+        startActivity(intent);
+        finish();
+    }
+
 
 
     public void goToFirstActivity(View v){
