@@ -1,6 +1,7 @@
 package com.example.first_aid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,22 @@ public class MainActivity extends BaseActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateLanguageIfNeeded();
+    }
+
+    private void updateLanguageIfNeeded() {
+        String currentLanguage = getResources().getConfiguration().locale.getLanguage();
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        String savedLanguage = prefs.getString("app_language", "ru");
+
+        if (!currentLanguage.equals(savedLanguage)) {
+            recreate();
+        }
     }
 
     public void goToSecondActivity(View v) {

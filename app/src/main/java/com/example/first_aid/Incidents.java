@@ -1,6 +1,5 @@
 package com.example.first_aid;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,19 +86,13 @@ public class Incidents extends BaseActivity {
         editor.putString("app_language", languageCode);
         editor.apply();
 
-
-        // ПЕРЕЗАГРУЖАЕМ ТОЛЬКО ТЕКУЩУЮ АКТИВНОСТЬ
-        Intent intent = new Intent(this, Incidents.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); // Без анимации
-        startActivity(intent);
-        finish();
+        recreate();
     }
 
 
 
     public void goToFirstActivity(View v){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     private void setupIncidentViews() {

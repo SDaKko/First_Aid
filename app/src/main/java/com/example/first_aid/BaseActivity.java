@@ -17,6 +17,7 @@ public class BaseActivity extends AppCompatActivity {
     private Context updateBaseContextLocale(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
         String language = preferences.getString("app_language", "ru");
+
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
 
