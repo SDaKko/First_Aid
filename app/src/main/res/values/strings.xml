@@ -22,4 +22,29 @@
     <string name="cut_description">Порез руки - промыть рану, обработать антисептиком, наложить повязку</string>
     <string name="burn_description">Ожог - охладить место ожога, нанести противоожоговую мазь, наложить стерильную повязку</string>
     <string name="fracture_description">Перелом - обездвижить конечность, приложить холод, доставить в травмпункт</string>
+
+    <string name="registration">Регистрация</string>
+    <string name="authorization">Авторизация</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="select_position">Выберите должность</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="login_button">Войти</string>
+    <string name="already_have_account_login">Уже есть аккаунт? Войти</string>
+    <string name="dont_have_account_register">Нет аккаунта? Зарегистрироваться</string>
+    <string name="fill_all_fields">Заполните все поля</string>
+    <string name="login_already_exists">Логин уже существует</string>
+    <string name="registration_success">Регистрация успешна!</string>
+    <string name="registration_failed">Ошибка регистрации</string>
+    <string name="login_success">Вход выполнен успешно!</string>
+    <string name="invalid_login_or_password">Неверный логин или пароль</string>
+    <string name="exit">Выход</string>
+
+    <string-array name="positions_array">
+        <item>Учитель</item>
+        <item>Врач</item>
+        <item>Мастер ПК</item>
+        <item>Водитель</item>
+        <item>Универсальный</item>
+    </string-array>
 </resources>

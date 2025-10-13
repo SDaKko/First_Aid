@@ -13,9 +13,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends BaseActivity {
 
+    private SharedPreferences userSession;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userSession = getSharedPreferences("UserSession", MODE_PRIVATE);
+
+        // Проверяем, авторизован ли пользователь
+        if (!userSession.getBoolean("is_logged_in", false)) {
+            goToLogin();
+            return;
+        }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -29,6 +40,12 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         updateLanguageIfNeeded();
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void updateLanguageIfNeeded() {
