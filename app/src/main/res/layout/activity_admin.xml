@@ -75,11 +75,31 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnLogout"
+    <!-- Кнопки навигации -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Выйти"
-        android:layout_marginTop="16dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnIncidents"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Происшествия"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#2196F3" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Выйти"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#F44336" />
+
+    </LinearLayout>
 
 </LinearLayout>

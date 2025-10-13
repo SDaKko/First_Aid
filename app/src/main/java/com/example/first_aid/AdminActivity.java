@@ -2,7 +2,6 @@ package com.example.first_aid;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +10,20 @@ import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class AdminActivity extends AppCompatActivity {
     private ListView lvUsers;
     private EditText etNewLogin, etNewPassword;
     private Spinner spinnerNewPosition;
-    private Button btnAddUser, btnLogout;
+    private Button btnAddUser, btnLogout, btnIncidents;
     private DatabaseHelper databaseHelper;
     private List<User> userList;
     private UserAdapter userAdapter;
+
+    // Регулярные выражения для валидации
+    private static final Pattern LOGIN_PATTERN = Pattern.compile("^[a-zA-Z0-9_]{3,20}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d).{5,}$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class AdminActivity extends AppCompatActivity {
         spinnerNewPosition = findViewById(R.id.spinnerNewPosition);
         btnAddUser = findViewById(R.id.btnAddUser);
         btnLogout = findViewById(R.id.btnLogout);
+        btnIncidents = findViewById(R.id.btnIncidents);
     }
 
     private void setupSpinner() {
@@ -59,6 +64,7 @@ public class AdminActivity extends AppCompatActivity {
     private void setupClickListeners() {
         btnAddUser.setOnClickListener(v -> addNewUser());
         btnLogout.setOnClickListener(v -> logout());
+        btnIncidents.setOnClickListener(v -> goToIncidents());
     }
 
     private void addNewUser() {
@@ -66,8 +72,8 @@ public class AdminActivity extends AppCompatActivity {
         String password = etNewPassword.getText().toString().trim();
         String position = spinnerNewPosition.getSelectedItem().toString();
 
-        if (login.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
+        // ВАЛИДАЦИЯ ДАННЫХ
+        if (!validateLogin(login) || !validatePassword(password)) {
             return;
         }
 
@@ -92,6 +98,59 @@ public class AdminActivity extends AppCompatActivity {
         }
     }
 
+    // ВАЛИДАЦИЯ ЛОГИНА
+    private boolean validateLogin(String login) {
+        if (login.isEmpty()) {
+            showValidationError("Логин не может быть пустым");
+            return false;
+        }
+
+        if (login.length() < 3) {
+            showValidationError("Логин должен содержать минимум 3 символа");
+            return false;
+        }
+
+        if (login.length() > 20) {
+            showValidationError("Логин не может быть длиннее 20 символов");
+            return false;
+        }
+
+        if (!LOGIN_PATTERN.matcher(login).matches()) {
+            showValidationError("Логин может содержать только буквы (a-z, A-Z), цифры (0-9) и символ подчеркивания (_)");
+            return false;
+        }
+
+        return true;
+    }
+
+    // ВАЛИДАЦИЯ ПАРОЛЯ
+    private boolean validatePassword(String password) {
+        if (password.isEmpty()) {
+            showValidationError("Пароль не может быть пустым");
+            return false;
+        }
+
+        if (password.length() < 5) {
+            showValidationError("Пароль должен содержать минимум 5 символов");
+            return false;
+        }
+
+        if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            showValidationError("Пароль должен содержать хотя бы одну букву и одну цифру");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void showValidationError(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ошибка валидации")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
     private void clearInputFields() {
         etNewLogin.setText("");
         etNewPassword.setText("");
@@ -103,6 +162,12 @@ public class AdminActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+    // ПЕРЕХОД НА АКТИВНОСТЬ ПРОИСШЕСТВИЙ
+    private void goToIncidents() {
+        Intent intent = new Intent(this, Incidents.class);
+        startActivity(intent);
     }
 
     // Адаптер для списка пользователей
