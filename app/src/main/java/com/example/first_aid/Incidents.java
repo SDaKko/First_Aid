@@ -1,5 +1,8 @@
 package com.example.first_aid;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,6 +69,10 @@ public class Incidents extends BaseActivity {
         } else if (id == R.id.language_english) {
             setLanguage("en");
             return true;
+        } else if (id == R.id.logout) {
+            // ВЫХОД ИЗ ПРИЛОЖЕНИЯ
+            performLogout();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -89,8 +96,6 @@ public class Incidents extends BaseActivity {
         recreate();
     }
 
-
-
     public void goToFirstActivity(View v){
         finish();
     }
@@ -113,5 +118,45 @@ public class Incidents extends BaseActivity {
 
     private void showInfo(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+//    private void showLogoutConfirmation() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle(getString(R.string.logout))
+//                .setMessage(getString(R.string.logout_confirmation))
+//                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        performLogout();
+//                    }
+//                })
+//                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .show();
+//    }
+
+    private void performLogout() {
+        // 1. Очищаем сессию пользователя
+        clearUserSession();
+
+        // 2. Закрываем ВСЕ активности и переходим на LoginActivity
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish(); // Завершаем текущую активность
+    }
+
+    private void clearUserSession() {
+        SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear(); // Очищаем ВСЕ данные сессии
+        editor.apply();
+
+        // Можно также показать сообщение
+        Toast.makeText(this, "Вы вышли из системы", Toast.LENGTH_SHORT).show();
     }
 }

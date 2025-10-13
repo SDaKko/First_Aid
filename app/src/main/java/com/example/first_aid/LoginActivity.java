@@ -15,12 +15,24 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Если пользователь уже авторизован, переходим сразу в MainActivity
+        if (isUserLoggedIn()) {
+            goToMainActivity();
+            return;
+        }
+
         setContentView(R.layout.activity_login);
 
         databaseHelper = new DatabaseHelper(this);
 
         initViews();
         setupClickListeners();
+    }
+
+    private boolean isUserLoggedIn() {
+        SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        return prefs.getBoolean("is_logged_in", false);
     }
 
     private void initViews() {
