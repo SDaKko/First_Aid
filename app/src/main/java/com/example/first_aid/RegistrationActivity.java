@@ -186,7 +186,7 @@ public class RegistrationActivity extends BaseActivity {
         }
 
         if (!LOGIN_PATTERN.matcher(login).matches()) {
-            textInputLayoutLogin.setError("Логин должен:\n• Начинаться с 3+ латинских букв\n• Затем могут идти буквы, цифры или _\n• Не может содержать спецсимволы кроме _");
+            textInputLayoutLogin.setError("Логин должен:\n- Начинаться с 3+ латинских букв\n- Затем могут идти буквы, цифры или _\n- Не может содержать спецсимволы кроме _");
             return false;
         }
 
