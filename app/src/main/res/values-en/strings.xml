@@ -22,4 +22,34 @@
     <string name="cut_description">Hand cut - clean the wound, apply antiseptic, apply a bandage</string>
     <string name="burn_description">Burn - cool the burn area, apply anti-burn ointment, apply sterile dressing</string>
     <string name="fracture_description">Fracture - immobilize the limb, apply cold, take to trauma center</string>
+
+    <string name="registration">Registration</string>
+    <string name="authorization">Authorization</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="select_position">Select position</string>
+    <string name="register">Register</string>
+    <string name="login_button">Log In</string>
+    <string name="already_have_account_login">Already have an account? Log In</string>
+    <string name="dont_have_account_register">Don\'t have an account? Register</string>
+    <string name="fill_all_fields">Fill all fields</string>
+    <string name="login_already_exists">Login already exists</string>
+    <string name="registration_success">Registration successful!</string>
+    <string name="registration_failed">Registration failed</string>
+    <string name="login_success">Login successful!</string>
+    <string name="invalid_login_or_password">Invalid login or password</string>
+    <string name="exit">Exit</string>
+
+    <string-array name="positions_array">
+        <item>Teacher</item>
+        <item>Doctor</item>
+        <item>PC Master</item>
+        <item>Driver</item>
+        <item>Universal</item>
+    </string-array>
+
+    <string name="logout">Logout</string>
+    <string name="logout_confirmation">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
