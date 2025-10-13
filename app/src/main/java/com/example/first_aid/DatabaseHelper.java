@@ -101,4 +101,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return exists;
     }
+
+
+    // ПОЛУЧЕНИЕ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ (для админ-панели)
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS,
+                new String[]{COLUMN_ID, COLUMN_LOGIN, COLUMN_PASSWORD, COLUMN_POSITION},
+                null, null, null, null, COLUMN_LOGIN + " ASC");
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                User user = new User();
+                user.setId(cursor.getInt(0));
+                user.setLogin(cursor.getString(1));
+                user.setPassword(cursor.getString(2));
+                user.setPosition(cursor.getString(3));
+                userList.add(user);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return userList;
+    }
+
+    // УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЯ ПО ЛОГИНУ
+    public boolean deleteUser(String login) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TABLE_USERS, COLUMN_LOGIN + " = ?", new String[]{login});
+        db.close();
+        return result > 0;
+    }
+
+    // ОБНОВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
+    public boolean updateUser(String oldLogin, User updatedUser) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LOGIN, updatedUser.getLogin());
+        values.put(COLUMN_PASSWORD, updatedUser.getPassword());
+        values.put(COLUMN_POSITION, updatedUser.getPosition());
+
+        int result = db.update(TABLE_USERS, values, COLUMN_LOGIN + " = ?", new String[]{oldLogin});
+        db.close();
+        return result > 0;
+    }
+
+    // ПРОВЕРКА ЯВЛЯЕТСЯ ЛИ ПОЛЬЗОВАТЕЛЬ АДМИНОМ
+    public boolean isAdmin(String login) {
+        // Админ имеет специальный логин/пароль
+        return "admin".equals(login);
+    }
 }

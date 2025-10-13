@@ -59,15 +59,28 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        if (databaseHelper.checkUser(login, password)) {
-            // Сохраняем информацию о пользователе
-            saveUserSession(login);
 
+        // ПРОВЕРКА АДМИНА
+        if (databaseHelper.isAdmin(login)) {
+            goToAdminActivity();
+            return;
+        }
+
+        // ОБЫЧНАЯ ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ
+        if (databaseHelper.checkUser(login, password)) {
+            saveUserSession(login);
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
             goToMainActivity();
         } else {
             Toast.makeText(this, R.string.invalid_login_or_password, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void goToAdminActivity() {
+        Intent intent = new Intent(this, AdminActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void saveUserSession(String login) {

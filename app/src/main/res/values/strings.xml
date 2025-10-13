@@ -52,4 +52,14 @@
     <string name="logout_confirmation">Вы уверены, что хотите выйти?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+
+    <string name="admin_panel">Панель администратора</string>
+    <string name="add_new_user">Добавить нового пользователя</string>
+    <string name="users_list">Список пользователей</string>
+    <string name="add_user">Добавить пользователя</string>
+    <string name="login_reserved">Логин \'admin\' зарезервирован</string>
+    <string name="user_added">Пользователь добавлен</string>
+    <string name="user_deleted">Пользователь удален</string>
+    <string name="cannot_delete_admin">Нельзя удалить администратора</string>
+    <string name="delete_user_confirmation">Вы уверены, что хотите удалить пользователя %s?</string>
 </resources>
