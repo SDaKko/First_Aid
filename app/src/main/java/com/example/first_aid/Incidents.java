@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -68,6 +69,12 @@ public class Incidents extends BaseActivity {
             return true;
         } else if (id == R.id.language_english) {
             setLanguage("en");
+            return true;
+        } else if (id == R.id.theme_light) {
+            setAppTheme(AppCompatDelegate.MODE_NIGHT_NO);
+            return true;
+        } else if (id == R.id.theme_dark) {
+            setAppTheme(AppCompatDelegate.MODE_NIGHT_YES);
             return true;
         } else if (id == R.id.logout) {
             // ВЫХОД ИЗ ПРИЛОЖЕНИЯ

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:padding="16dp">
 
     <LinearLayout
@@ -13,11 +14,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
             android:text="Регистрация"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:textStyle="bold" />
 
         <!-- Поле логина с TextInputLayout -->
         <com.google.android.material.textfield.TextInputLayout
@@ -25,9 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:errorEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="20">
+            app:counterMaxLength="20"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLogin"
@@ -46,9 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="30"
+            app:errorEnabled="true"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -64,9 +65,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Выберите должность"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/spinnerPosition"
@@ -78,18 +79,19 @@
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="Зарегистрироваться"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvLoginLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Уже есть аккаунт? Войти"
+            android:clickable="true"
             android:gravity="center"
-            android:textColor="@color/blue"
-            android:clickable="true" />
+            android:text="Уже есть аккаунт? Войти"
+            android:textColor="@color/blue" />
 
     </LinearLayout>
 </ScrollView>

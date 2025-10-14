@@ -2,7 +2,7 @@
     <string name="app_name">First_Aid</string>
     <string name="industries_list">Список отраслей</string>
     <string name="back">Назад</string>
-    <string name="incidents">Инциденты</string>
+    <string name="incidents">Происшествия</string>
     <string name="incident_1">Инцидент 1</string>
     <string name="incident_2">Инцидент 2</string>
     <string name="incident_3">Инцидент 3</string>
@@ -52,4 +52,9 @@
     <string name="logout_confirmation">Вы уверены, что хотите выйти?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+
+    <string name="theme">Тема</string>
+    <string name="light_theme">Светлая</string>
+    <string name="dark_theme">Тёмная</string>
+    <string name="system_theme">Системная</string>
 </resources>

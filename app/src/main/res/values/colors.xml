@@ -5,4 +5,8 @@
     <color name="common_background_toolbar">#2196F3</color>
     <color name="blue_text">#2196F3</color>
     <color name="blue">#2196F3</color>
+    <color name="green_button">#4CAF50</color>
+    <color name="red_button">#F44336</color>
+    <color name="blue_button">#2196F3</color>
+
 </resources>
