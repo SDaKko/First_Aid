@@ -63,11 +63,17 @@
     <string name="cannot_delete_admin">Нельзя удалить администратора</string>
     <string name="delete_user_confirmation">Вы уверены, что хотите удалить пользователя %s?</string>
 
-    <!-- Новые строки для темы -->
     <string name="theme">Тема</string>
     <string name="light_theme">Светлая</string>
     <string name="dark_theme">Тёмная</string>
     <string name="system_theme">Системная</string>
+
+
+    <string name="settings">Настройки</string>
+    <string name="about_app">О приложении</string>
+    <string name="share_app">Поделиться приложением</string>
+    <string name="contact_support">Связаться с поддержкой</string>
+    <string name="back_to_main">Вернуться на главную</string>
 
 
 </resources>
