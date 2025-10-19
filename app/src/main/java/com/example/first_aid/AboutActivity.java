@@ -29,14 +29,14 @@ public class AboutActivity extends BaseActivity {
         Button btnShareApp = findViewById(R.id.btnShareApp);
         Button btnBack = findViewById(R.id.btnBack);
 
-        // НЕЯВНОЕ НАМЕРЕНИЕ - Поделиться приложением
+        // Неявное намерение
         btnShareApp.setOnClickListener(v -> shareApp());
 
         // Возврат с результатом
         btnBack.setOnClickListener(v -> goBackWithResult());
     }
 
-    // НЕЯВНОЕ НАМЕРЕНИЕ - отправка email
+    // еявное намерение - отправка email
     private void shareApp() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -50,7 +50,6 @@ public class AboutActivity extends BaseActivity {
             Intent chooser = Intent.createChooser(intent, "Поделиться приложением через");
             startActivity(chooser);
 
-            // После успешного шаринга
             returnWithResult(true, "Приложение успешно рекомендовано");
         } catch (Exception e) {
             Toast.makeText(this, "Ошибка при рекомендации приложения", Toast.LENGTH_SHORT).show();
@@ -58,11 +57,9 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void goBackWithResult() {
-        // Возвращаем результат без данных о шаринге
         returnWithResult(false, "Возврат из информации о приложении");
     }
 
-    // Метод для возврата результата
     private void returnWithResult(boolean appShared, String message) {
         Intent resultIntent = new Intent();
         resultIntent.putExtra("app_shared", appShared);

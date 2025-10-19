@@ -33,7 +33,6 @@ public class SettingsActivity extends BaseActivity {
             userName = extras.getString("user_name", "Пользователь");
             userId = extras.getInt("user_id", 0);
 
-            // Загружаем данные пользователя
             currentUser = databaseHelper.getUser(userName);
 
             TextView tvUserInfo = findViewById(R.id.tvUserInfo);
@@ -65,7 +64,6 @@ public class SettingsActivity extends BaseActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNewPosition.setAdapter(adapter);
 
-        // Устанавливаем текущую должность как выбранную по умолчанию
         if (currentUser != null && currentUser.getPosition() != null) {
             String currentPosition = currentUser.getPosition();
             for (int i = 0; i < positions.length; i++) {
@@ -87,40 +85,33 @@ public class SettingsActivity extends BaseActivity {
         btnBackToMain.setOnClickListener(v -> goBackWithResult());
     }
 
-    // ОБНОВЛЕНИЕ ПРОФИЛЯ ПОЛЬЗОВАТЕЛЯ С СОХРАНЕНИЕМ СТАРЫХ ЗНАЧЕНИЙ
     private void updateUserProfile() {
         if (currentUser == null) {
             Toast.makeText(this, "Ошибка: пользователь не найден", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Получаем новые значения из полей ввода
         String newPassword = etNewPassword.getText().toString().trim();
         String newPosition = spinnerNewPosition.getSelectedItem().toString();
 
-        // ВАЛИДАЦИЯ ПАРОЛЯ (если введен новый)
         if (!newPassword.isEmpty() && !isValidPassword(newPassword)) {
             showPasswordValidationError();
             return;
         }
 
-        // Подготавливаем обновленные данные
         String finalPassword = newPassword.isEmpty() ? currentUser.getPassword() : newPassword;
         String finalPosition = newPosition.equals(currentUser.getPosition()) ?
                 currentUser.getPosition() : newPosition;
 
-        // Создаем обновленного пользователя
         User updatedUser = new User(
                 currentUser.getLogin(),
                 finalPassword,
                 finalPosition
         );
 
-        // Используем метод updateUser из DatabaseHelper по логину
         boolean success = databaseHelper.updateUser(userName, updatedUser);
 
         if (success) {
-            // Формируем сообщение об успехе
             StringBuilder message = new StringBuilder("Профиль обновлен");
 
             if (!newPassword.isEmpty()) {
@@ -134,10 +125,8 @@ public class SettingsActivity extends BaseActivity {
                 message.append(" (изменений нет)");
             }
 
-            // Возвращаем результат с информацией об обновлении
             returnWithResult("user_updated", message.toString());
 
-            // Очищаем поле пароля
             etNewPassword.setText("");
 
         } else {
@@ -145,13 +134,11 @@ public class SettingsActivity extends BaseActivity {
         }
     }
 
-    // ВАЛИДАЦИЯ ПАРОЛЯ
     private boolean isValidPassword(String password) {
         if (password.length() < 5) {
             return false;
         }
 
-        // Проверяем, содержит ли пароль хотя бы одну букву и одну цифру
         boolean hasLetter = false;
         boolean hasDigit = false;
 
@@ -171,7 +158,7 @@ public class SettingsActivity extends BaseActivity {
                 .show();
     }
 
-    // НЕЯВНОЕ НАМЕРЕНИЕ - Отправка email в поддержку
+    // Неявное намерение
     private void contactSupport() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
@@ -194,7 +181,6 @@ public class SettingsActivity extends BaseActivity {
         returnWithResult("settings_closed", "Настройки закрыты без изменений");
     }
 
-    // Метод для возврата результата родительской активности
     private void returnWithResult(String action, String message) {
         Intent resultIntent = new Intent();
         resultIntent.putExtra("action", action);

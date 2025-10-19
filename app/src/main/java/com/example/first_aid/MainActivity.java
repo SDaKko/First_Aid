@@ -20,7 +20,6 @@ public class MainActivity extends BaseActivity {
     private static final int ABOUT_REQUEST_CODE = 2;
     private DatabaseHelper databaseHelper;
 
-    // Добавляем TextView для отображения информации о пользователе
     private TextView tvUserName, tvUserPosition;
 
     @Override
@@ -38,10 +37,8 @@ public class MainActivity extends BaseActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Инициализируем UI элементы
         initUserInfoViews();
 
-        // Показываем текущую информацию о пользователе
         displayCurrentUserInfo();
 
         setupNavigation();
@@ -54,13 +51,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initUserInfoViews() {
-        // Находим TextView для отображения информации о пользователе
         tvUserName = findViewById(R.id.tvUserName);
         tvUserPosition = findViewById(R.id.tvUserPosition);
     }
 
-    // ОБНОВЛЕНИЕ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ НА UI И В БАЗЕ ДАННЫХ
-    // Оставляем только общий метод обновления UI
     private void updateUserInfo() {
         String currentLogin = userSession.getString("user_login", "");
 
@@ -68,13 +62,11 @@ public class MainActivity extends BaseActivity {
             User currentUser = databaseHelper.getUser(currentLogin);
 
             if (currentUser != null) {
-                // Обновляем SharedPreferences
                 SharedPreferences.Editor editor = userSession.edit();
                 editor.putString("user_login", currentUser.getLogin());
                 editor.putString("user_position", currentUser.getPosition());
                 editor.apply();
 
-                // Обновляем UI
                 displayUserInfo(currentUser);
 
                 Toast.makeText(this, "Информация о пользователе обновлена", Toast.LENGTH_SHORT).show();
@@ -83,7 +75,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    // ОТОБРАЖЕНИЕ ТЕКУЩЕЙ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ
     private void displayCurrentUserInfo() {
         String login = userSession.getString("user_login", "");
         String position = userSession.getString("user_position", "");
@@ -96,7 +87,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    // ОТОБРАЖЕНИЕ ИНФОРМАЦИИ О КОНКРЕТНОМ ПОЛЬЗОВАТЕЛЕ
     private void displayUserInfo(User user) {
         if (tvUserName != null) {
             tvUserName.setText("Пользователь: " + user.getLogin());
@@ -109,14 +99,12 @@ public class MainActivity extends BaseActivity {
 
 
     private void setupNavigation() {
-        // Кнопка перехода в Настройки
         findViewById(R.id.settingsButton).setOnClickListener(v -> openSettings());
 
-        // Кнопка перехода "О приложении"
         findViewById(R.id.aboutButton).setOnClickListener(v -> openAbout());
     }
 
-    // ЯВНОЕ НАМЕРЕНИЕ с ожиданием результата
+    // Явное намерение с ожиданием результата
     private void openSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
 
@@ -124,22 +112,20 @@ public class MainActivity extends BaseActivity {
         intent.putExtra("user_name", userSession.getString("user_login", "Пользователь"));
         intent.putExtra("user_id", 12345);
 
-        // Запускаем активность с ожиданием результата
         startActivityForResult(intent, SETTINGS_REQUEST_CODE);
     }
 
-    // ЯВНОЕ НАМЕРЕНИЕ с ожиданием результата
+    // Явное намерение с ожиданием результата
     private void openAbout() {
         Intent intent = new Intent(this, AboutActivity.class);
 
-        // Передаем данные в дочернюю активность
         intent.putExtra("user_name", userSession.getString("user_login", "Пользователь"));
         intent.putExtra("user_position", userSession.getString("user_position", "Универсальная"));
 
         startActivityForResult(intent, ABOUT_REQUEST_CODE);
     }
 
-    // ОБРАБОТКА РЕЗУЛЬТАТА ИЗ ДОЧЕРНИХ АКТИВНОСТЕЙ
+    // Обработка результата из дочерних активностей
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -147,12 +133,10 @@ public class MainActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case SETTINGS_REQUEST_CODE:
-                    // Обработка возврата из настроек
                     handleSettingsResult(data);
                     break;
 
                 case ABOUT_REQUEST_CODE:
-                    // Обработка возврата из "О приложении"
                     handleAboutResult(data);
                     break;
             }
@@ -166,13 +150,8 @@ public class MainActivity extends BaseActivity {
 
             if ("language_changed".equals(action)) {
                 Toast.makeText(this, "Язык изменен: " + message, Toast.LENGTH_SHORT).show();
-                recreate(); // Пересоздаем для применения языка
-            } else if ("profile_updated".equals(action)) {
-                // ОБНОВЛЯЕМ ИНФОРМАЦИЮ О ПОЛЬЗОВАТЕЛЕ
-                updateUserInfo();
-                Toast.makeText(this, "Профиль обновлен: " + message, Toast.LENGTH_SHORT).show();
+                recreate();
             } else if ("user_updated".equals(action)) {
-                // ОБНОВЛЯЕМ ИНФОРМАЦИЮ О ПОЛЬЗОВАТЕЛЕ
                 updateUserInfo();
                 Toast.makeText(this, "Данные пользователя обновлены: " + message, Toast.LENGTH_SHORT).show();
             } else {

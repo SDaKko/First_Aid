@@ -41,7 +41,7 @@
     <string name="exit">Выход</string>
 
     <string-array name="positions_array">
-        <item>Учитель</item>
+        <item>Преподаватель</item>
         <item>Врач</item>
         <item>Мастер ПК</item>
         <item>Водитель</item>
