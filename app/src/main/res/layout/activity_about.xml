@@ -2,42 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:text="О приложении"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvAppInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="First Aid - приложение первой помощи"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:text="First Aid - приложение первой помощи"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvVersion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Версия: 1.0"
-        android:textSize="14sp"
+        android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:layout_marginBottom="24dp" />
+        android:text="Версия: 1.0"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btnShareApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Поделиться приложением"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:text="Поделиться приложением" />
 
     <Button
         android:id="@+id/btnBack"

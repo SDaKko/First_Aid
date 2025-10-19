@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,12 +18,17 @@ public class MainActivity extends BaseActivity {
     private SharedPreferences userSession;
     private static final int SETTINGS_REQUEST_CODE = 1;
     private static final int ABOUT_REQUEST_CODE = 2;
+    private DatabaseHelper databaseHelper;
+
+    // Добавляем TextView для отображения информации о пользователе
+    private TextView tvUserName, tvUserPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         userSession = getSharedPreferences("UserSession", MODE_PRIVATE);
+        databaseHelper = new DatabaseHelper(this);
 
         if (!userSession.getBoolean("is_logged_in", false)) {
             goToLogin();
@@ -32,6 +38,12 @@ public class MainActivity extends BaseActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Инициализируем UI элементы
+        initUserInfoViews();
+
+        // Показываем текущую информацию о пользователе
+        displayCurrentUserInfo();
+
         setupNavigation();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -40,6 +52,66 @@ public class MainActivity extends BaseActivity {
             return insets;
         });
     }
+
+    private void initUserInfoViews() {
+        // Находим TextView для отображения информации о пользователе
+        tvUserName = findViewById(R.id.tvUserName);
+        tvUserPosition = findViewById(R.id.tvUserPosition);
+    }
+
+    // ОБНОВЛЕНИЕ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ НА UI И В БАЗЕ ДАННЫХ
+    // Оставляем только общий метод обновления UI
+    private void updateUserInfo() {
+        String currentLogin = userSession.getString("user_login", "");
+
+        if (!currentLogin.isEmpty()) {
+            User currentUser = databaseHelper.getUser(currentLogin);
+
+            if (currentUser != null) {
+                // Обновляем SharedPreferences
+                SharedPreferences.Editor editor = userSession.edit();
+                editor.putString("user_login", currentUser.getLogin());
+                editor.putString("user_position", currentUser.getPosition());
+                editor.apply();
+
+                // Обновляем UI
+                displayUserInfo(currentUser);
+
+                Toast.makeText(this, "Информация о пользователе обновлена", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ В БАЗЕ (используя метод из DatabaseHelper)
+    private boolean updateUserInDatabase(String oldLogin, User updatedUser) {
+        return databaseHelper.updateUser(oldLogin, updatedUser);
+    }
+
+
+    // ОТОБРАЖЕНИЕ ТЕКУЩЕЙ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ
+    private void displayCurrentUserInfo() {
+        String login = userSession.getString("user_login", "");
+        String position = userSession.getString("user_position", "");
+
+        if (tvUserName != null) {
+            tvUserName.setText("Пользователь: " + login);
+        }
+        if (tvUserPosition != null) {
+            tvUserPosition.setText("Должность: " + position);
+        }
+    }
+
+    // ОТОБРАЖЕНИЕ ИНФОРМАЦИИ О КОНКРЕТНОМ ПОЛЬЗОВАТЕЛЕ
+    private void displayUserInfo(User user) {
+        if (tvUserName != null) {
+            tvUserName.setText("Пользователь: " + user.getLogin());
+        }
+        if (tvUserPosition != null) {
+            tvUserPosition.setText("Должность: " + user.getPosition());
+        }
+    }
+
+
 
     private void setupNavigation() {
         // Кнопка перехода в Настройки
@@ -101,8 +173,13 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(this, "Язык изменен: " + message, Toast.LENGTH_SHORT).show();
                 recreate(); // Пересоздаем для применения языка
             } else if ("profile_updated".equals(action)) {
-                Toast.makeText(this, "Профиль обновлен: " + message, Toast.LENGTH_SHORT).show();
+                // ОБНОВЛЯЕМ ИНФОРМАЦИЮ О ПОЛЬЗОВАТЕЛЕ
                 updateUserInfo();
+                Toast.makeText(this, "Профиль обновлен: " + message, Toast.LENGTH_SHORT).show();
+            } else if ("user_updated".equals(action)) {
+                // ОБНОВЛЯЕМ ИНФОРМАЦИЮ О ПОЛЬЗОВАТЕЛЕ
+                updateUserInfo();
+                Toast.makeText(this, "Данные пользователя обновлены: " + message, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Настройки сохранены: " + message, Toast.LENGTH_SHORT).show();
             }
@@ -118,10 +195,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void updateUserInfo() {
-        // Обновляем информацию о пользователе на UI
-        // Например, обновляем TextView с именем пользователя
-    }
 
 
     @Override
