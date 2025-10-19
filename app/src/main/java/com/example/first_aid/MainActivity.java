@@ -82,11 +82,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    // ОБНОВЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ В БАЗЕ (используя метод из DatabaseHelper)
-    private boolean updateUserInDatabase(String oldLogin, User updatedUser) {
-        return databaseHelper.updateUser(oldLogin, updatedUser);
-    }
-
 
     // ОТОБРАЖЕНИЕ ТЕКУЩЕЙ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ
     private void displayCurrentUserInfo() {
@@ -139,7 +134,7 @@ public class MainActivity extends BaseActivity {
 
         // Передаем данные в дочернюю активность
         intent.putExtra("user_name", userSession.getString("user_login", "Пользователь"));
-        intent.putExtra("user_position", userSession.getString("user_position", "Гость"));
+        intent.putExtra("user_position", userSession.getString("user_position", "Универсальная"));
 
         startActivityForResult(intent, ABOUT_REQUEST_CODE);
     }
@@ -189,8 +184,12 @@ public class MainActivity extends BaseActivity {
     private void handleAboutResult(Intent data) {
         if (data != null) {
             boolean appShared = data.getBooleanExtra("app_shared", false);
+            String notSharedText = data.getStringExtra("message");
             if (appShared) {
                 Toast.makeText(this, "Спасибо, что поделились приложением!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this, notSharedText, Toast.LENGTH_SHORT).show();
             }
         }
     }

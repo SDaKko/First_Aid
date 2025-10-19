@@ -19,7 +19,7 @@ public class AboutActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userName = extras.getString("user_name", "Пользователь");
-            userPosition = extras.getString("user_position", "Гость");
+            userPosition = extras.getString("user_position", "Универсальная");
 
             TextView tvAppInfo = findViewById(R.id.tvAppInfo);
             tvAppInfo.setText("First Aid - приложение первой помощи\n\nДобро пожаловать, " +
@@ -51,9 +51,9 @@ public class AboutActivity extends BaseActivity {
             startActivity(chooser);
 
             // После успешного шаринга
-            returnWithResult(true, "Приложение успешно расшарено");
+            returnWithResult(true, "Приложение успешно рекомендовано");
         } catch (Exception e) {
-            Toast.makeText(this, "Ошибка при шаринге приложения", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ошибка при рекомендации приложения", Toast.LENGTH_SHORT).show();
         }
     }
 
