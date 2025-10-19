@@ -16,7 +16,6 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Если пользователь уже авторизован, переходим сразу в MainActivity
         if (isUserLoggedIn()) {
             goToMainActivity();
             return;
@@ -60,13 +59,11 @@ public class LoginActivity extends BaseActivity {
         }
 
 
-        // ПРОВЕРКА АДМИНА
         if (databaseHelper.isAdmin(login)) {
             goToAdminActivity();
             return;
         }
 
-        // ОБЫЧНАЯ ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ
         if (databaseHelper.checkUser(login, password)) {
             saveUserSession(login);
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();

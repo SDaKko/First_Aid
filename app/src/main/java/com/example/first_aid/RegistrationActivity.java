@@ -19,7 +19,6 @@ public class RegistrationActivity extends BaseActivity {
     private Spinner spinnerPosition;
     private DatabaseHelper databaseHelper;
 
-    // Регулярные выражения для валидации
     private static final Pattern LOGIN_PATTERN = Pattern.compile("^[a-zA-Z]{3,}[a-zA-Z0-9_]*$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d).{5,}$");
 
@@ -37,15 +36,12 @@ public class RegistrationActivity extends BaseActivity {
     }
 
     private void initViews() {
-        // TextInputLayout
         textInputLayoutLogin = findViewById(R.id.textInputLayoutLogin);
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
 
-        // EditText
         etLogin = findViewById(R.id.etLogin);
         etPassword = findViewById(R.id.etPassword);
 
-        // Остальные элементы
         spinnerPosition = findViewById(R.id.spinnerPosition);
         Button btnRegister = findViewById(R.id.btnRegister);
         TextView tvLoginLink = findViewById(R.id.tvLoginLink);
@@ -67,7 +63,6 @@ public class RegistrationActivity extends BaseActivity {
         tvLoginLink.setOnClickListener(v -> goToLogin());
     }
 
-    // Настройка слушателей изменений текста для реальной валидации
     private void setupTextWatchers() {
         etLogin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,7 +96,6 @@ public class RegistrationActivity extends BaseActivity {
         String password = etPassword.getText().toString().trim();
         String position = spinnerPosition.getSelectedItem().toString();
 
-        // ВАЛИДАЦИЯ ДАННЫХ ПЕРЕД РЕГИСТРАЦИЕЙ
         boolean isLoginValid = validateLogin(login);
         boolean isPasswordValid = validatePassword(password);
 
@@ -110,7 +104,6 @@ public class RegistrationActivity extends BaseActivity {
             return;
         }
 
-        // Проверяем, не пытаемся ли создать админа
         if ("admin".equals(login)) {
             textInputLayoutLogin.setError("Логин 'admin' зарезервирован для системного администратора");
             return;
@@ -130,7 +123,6 @@ public class RegistrationActivity extends BaseActivity {
         }
     }
 
-    // ВАЛИДАЦИЯ ЛОГИНА В РЕАЛЬНОМ ВРЕМЕНИ
     private void validateLoginLive(String login) {
         if (login.isEmpty()) {
             textInputLayoutLogin.setError(null);
@@ -148,7 +140,6 @@ public class RegistrationActivity extends BaseActivity {
         }
     }
 
-    // ВАЛИДАЦИЯ ПАРОЛЯ В РЕАЛЬНОМ ВРЕМЕНИ
     private void validatePasswordLive(String password) {
         if (password.isEmpty()) {
             textInputLayoutPassword.setError(null);
@@ -168,7 +159,6 @@ public class RegistrationActivity extends BaseActivity {
         }
     }
 
-    // ФИНАЛЬНАЯ ВАЛИДАЦИЯ ЛОГИНА ПЕРЕД РЕГИСТРАЦИЕЙ
     private boolean validateLogin(String login) {
         if (login.isEmpty()) {
             textInputLayoutLogin.setError("Логин не может быть пустым");
@@ -194,7 +184,6 @@ public class RegistrationActivity extends BaseActivity {
         return true;
     }
 
-    // ФИНАЛЬНАЯ ВАЛИДАЦИЯ ПАРОЛЯ ПЕРЕД РЕГИСТРАЦИЕЙ
     private boolean validatePassword(String password) {
         if (password.isEmpty()) {
             textInputLayoutPassword.setError("Пароль не может быть пустым");
@@ -225,19 +214,18 @@ public class RegistrationActivity extends BaseActivity {
         return true;
     }
 
-    // ПРОВЕРКА НА СЛАБЫЙ ПАРОЛЬ
     private boolean isWeakPassword(String password) {
-        // Проверяем, состоит ли пароль только из цифр
+
         if (password.matches("^[0-9]+$")) {
             return true;
         }
 
-        // Проверяем, состоит ли пароль только из букв
+
         if (password.matches("^[a-zA-Z]+$")) {
             return true;
         }
 
-        // Проверяем простые последовательности
+
         String[] weakPatterns = {
                 "12345", "123456", "1234567", "12345678", "123456789", "1234567890",
                 "password", "qwerty", "admin", "11111", "00000", "aaaaa"

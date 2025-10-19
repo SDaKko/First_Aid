@@ -21,7 +21,6 @@ public class MainActivity extends BaseActivity {
 
         userSession = getSharedPreferences("UserSession", MODE_PRIVATE);
 
-        // Проверяем, авторизован ли пользователь
         if (!userSession.getBoolean("is_logged_in", false)) {
             goToLogin();
             return;

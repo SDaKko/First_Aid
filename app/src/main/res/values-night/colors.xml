@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Базовые цвета (инвертированные) -->
+
     <color name="black">#FFFFFFFF</color>
     <color name="white">#2C2C2C</color>
 
-    <!-- Синие акцентные цвета (немного светлее для лучшей видимости) -->
     <color name="common_background_toolbar">#4842FF</color>
     <color name="blue_text">#4842FF</color>
     <color name="blue">#4842FF</color>

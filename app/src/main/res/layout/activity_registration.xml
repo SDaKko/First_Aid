@@ -20,7 +20,6 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <!-- Поле логина с TextInputLayout -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutLogin"
             android:layout_width="match_parent"
@@ -41,7 +40,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Поле пароля с TextInputLayout -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutPassword"
             android:layout_width="match_parent"

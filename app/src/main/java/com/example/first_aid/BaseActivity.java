@@ -31,7 +31,6 @@ public class BaseActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Восстанавливаем тему перед созданием
         restoreTheme();
         super.onCreate(savedInstanceState);
     }

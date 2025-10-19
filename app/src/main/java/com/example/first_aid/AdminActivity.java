@@ -21,7 +21,6 @@ public class AdminActivity extends AppCompatActivity {
     private List<User> userList;
     private UserAdapter userAdapter;
 
-    // Регулярные выражения для валидации
     private static final Pattern LOGIN_PATTERN = Pattern.compile("^[a-zA-Z0-9_]{3,20}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d).{5,}$");
 
@@ -72,12 +71,10 @@ public class AdminActivity extends AppCompatActivity {
         String password = etNewPassword.getText().toString().trim();
         String position = spinnerNewPosition.getSelectedItem().toString();
 
-        // ВАЛИДАЦИЯ ДАННЫХ
         if (!validateLogin(login) || !validatePassword(password)) {
             return;
         }
 
-        // Проверяем, не пытаемся ли создать второго админа
         if ("admin".equals(login)) {
             Toast.makeText(this, "Логин 'admin' зарезервирован", Toast.LENGTH_SHORT).show();
             return;
@@ -92,13 +89,12 @@ public class AdminActivity extends AppCompatActivity {
         if (databaseHelper.addUser(newUser)) {
             Toast.makeText(this, "Пользователь добавлен", Toast.LENGTH_SHORT).show();
             clearInputFields();
-            loadUsers(); // Обновляем список
+            loadUsers();
         } else {
             Toast.makeText(this, "Ошибка добавления", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // ВАЛИДАЦИЯ ЛОГИНА
     private boolean validateLogin(String login) {
         if (login.isEmpty()) {
             showValidationError("Логин не может быть пустым");
@@ -123,7 +119,6 @@ public class AdminActivity extends AppCompatActivity {
         return true;
     }
 
-    // ВАЛИДАЦИЯ ПАРОЛЯ
     private boolean validatePassword(String password) {
         if (password.isEmpty()) {
             showValidationError("Пароль не может быть пустым");
@@ -164,13 +159,11 @@ public class AdminActivity extends AppCompatActivity {
         finish();
     }
 
-    // ПЕРЕХОД НА АКТИВНОСТЬ ПРОИСШЕСТВИЙ
     private void goToIncidents() {
         Intent intent = new Intent(this, Incidents.class);
         startActivity(intent);
     }
 
-    // Адаптер для списка пользователей
     private class UserAdapter extends ArrayAdapter<User> {
         UserAdapter(List<User> users) {
             super(AdminActivity.this, R.layout.item_user, users);
@@ -191,7 +184,6 @@ public class AdminActivity extends AppCompatActivity {
             tvLogin.setText(user.getLogin());
             tvPosition.setText(user.getPosition());
 
-            // Обработчик удаления пользователя
             btnDelete.setOnClickListener(v -> showDeleteConfirmation(user));
 
             return convertView;
@@ -199,7 +191,6 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void showDeleteConfirmation(User user) {
-        // Не позволяем удалить самого админа
         if ("admin".equals(user.getLogin())) {
             Toast.makeText(this, "Нельзя удалить администратора", Toast.LENGTH_SHORT).show();
             return;
@@ -216,7 +207,7 @@ public class AdminActivity extends AppCompatActivity {
     private void deleteUser(User user) {
         if (databaseHelper.deleteUser(user.getLogin())) {
             Toast.makeText(this, "Пользователь удален", Toast.LENGTH_SHORT).show();
-            loadUsers(); // Обновляем список
+            loadUsers();
         } else {
             Toast.makeText(this, "Ошибка удаления", Toast.LENGTH_SHORT).show();
         }

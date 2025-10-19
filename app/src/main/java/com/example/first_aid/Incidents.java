@@ -77,7 +77,6 @@ public class Incidents extends BaseActivity {
             setAppTheme(AppCompatDelegate.MODE_NIGHT_YES);
             return true;
         } else if (id == R.id.logout) {
-            // ВЫХОД ИЗ ПРИЛОЖЕНИЯ
             performLogout();
             return true;
         }
@@ -127,43 +126,21 @@ public class Incidents extends BaseActivity {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
-//    private void showLogoutConfirmation() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle(getString(R.string.logout))
-//                .setMessage(getString(R.string.logout_confirmation))
-//                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        performLogout();
-//                    }
-//                })
-//                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .show();
-//    }
-
     private void performLogout() {
-        // 1. Очищаем сессию пользователя
         clearUserSession();
 
-        // 2. Закрываем ВСЕ активности и переходим на LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish(); // Завершаем текущую активность
+        finish();
     }
 
     private void clearUserSession() {
         SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.clear(); // Очищаем ВСЕ данные сессии
+        editor.clear();
         editor.apply();
 
-        // Можно также показать сообщение
         Toast.makeText(this, "Вы вышли из системы", Toast.LENGTH_SHORT).show();
     }
 }

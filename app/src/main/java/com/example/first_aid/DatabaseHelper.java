@@ -12,7 +12,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "FirstAidApp.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Таблица пользователей
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_LOGIN = "login";
@@ -39,7 +38,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Добавление нового пользователя
     public boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -52,7 +50,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    // Проверка существования пользователя
     public boolean checkUser(String login, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_ID};
@@ -68,7 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count > 0;
     }
 
-    // Получение пользователя по логину
     public User getUser(String login) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS,
@@ -89,7 +85,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    // Проверка существования логина
     public boolean isLoginExists(String login) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS,
@@ -103,7 +98,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    // ПОЛУЧЕНИЕ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ (для админ-панели)
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -126,7 +120,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
-    // УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЯ ПО ЛОГИНУ
     public boolean deleteUser(String login) {
         SQLiteDatabase db = this.getWritableDatabase();
         int result = db.delete(TABLE_USERS, COLUMN_LOGIN + " = ?", new String[]{login});
@@ -134,7 +127,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    // ОБНОВЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
     public boolean updateUser(String oldLogin, User updatedUser) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -147,9 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    // ПРОВЕРКА ЯВЛЯЕТСЯ ЛИ ПОЛЬЗОВАТЕЛЬ АДМИНОМ
     public boolean isAdmin(String login) {
-        // Админ имеет специальный логин/пароль
         return "admin".equals(login);
     }
 }
