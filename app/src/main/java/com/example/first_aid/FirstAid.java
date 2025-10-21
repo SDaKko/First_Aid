@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -88,10 +86,10 @@ public class FirstAid extends BaseActivity {
 
             if (bitmap != null) {
                 imageView.setImageBitmap(bitmap);
-                android.util.Log.d("FirstAid", "✓ Image loaded successfully: " + imageName);
+                android.util.Log.d("FirstAid", "Image loaded successfully: " + imageName);
             } else {
-                imageView.setImageResource(R.drawable.ic_error);
-                android.util.Log.e("FirstAid", "✗ Bitmap is null for: " + imageName);
+                imageView.setImageResource(R.drawable.pic_error);
+                android.util.Log.e("FirstAid", "Bitmap is null for: " + imageName);
                 Toast.makeText(this, "Не удалось загрузить изображение", Toast.LENGTH_SHORT).show();
             }
 
@@ -99,8 +97,8 @@ public class FirstAid extends BaseActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
-            imageView.setImageResource(R.drawable.ic_error);
-            android.util.Log.e("FirstAid", "✗ File not found: " + imageName);
+            imageView.setImageResource(R.drawable.pic_error);
+            android.util.Log.e("FirstAid", "File not found: " + imageName);
             Toast.makeText(this, "Файл не найден: " + imageName, Toast.LENGTH_SHORT).show();
         }
     }

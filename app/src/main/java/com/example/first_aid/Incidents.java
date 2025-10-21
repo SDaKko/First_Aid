@@ -71,7 +71,7 @@ public class Incidents extends BaseActivity {
         incidentsList = databaseHelper.getIncidentsForPosition(userPosition);
 
         // Обновляем заголовок с информацией о количестве
-        updateToolbarTitle();
+//        updateToolbarTitle();
     }
 
     private void updateToolbarTitle() {

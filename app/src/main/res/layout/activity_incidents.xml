@@ -39,11 +39,12 @@
                 android:id="@+id/textViewFirstAid2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/incidents"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="26sp" />
+                android:textSize="20sp" />
 
         </androidx.appcompat.widget.Toolbar>
 
