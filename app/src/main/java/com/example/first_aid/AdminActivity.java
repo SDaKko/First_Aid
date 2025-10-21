@@ -14,12 +14,12 @@ import java.util.regex.Pattern;
 
 public class AdminActivity extends AppCompatActivity {
     private ListView lvUsers;
-    private EditText etNewLogin, etNewPassword;
     private Spinner spinnerNewPosition;
     private Button btnAddUser, btnLogout, btnIncidents;
     private DatabaseHelper databaseHelper;
     private List<User> userList;
     private UserAdapter userAdapter;
+    private InputFieldsFragment inputFieldsFragment;
 
     private static final Pattern LOGIN_PATTERN = Pattern.compile("^[a-zA-Z0-9_]{3,20}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d).{5,}$");
@@ -36,10 +36,16 @@ public class AdminActivity extends AppCompatActivity {
         setupClickListeners();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Получаем ссылку на фрагмент после создания активности
+        inputFieldsFragment = (InputFieldsFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.adminLoginFieldsFragment);
+    }
+
     private void initViews() {
         lvUsers = findViewById(R.id.lvUsers);
-        etNewLogin = findViewById(R.id.etNewLogin);
-        etNewPassword = findViewById(R.id.etNewPassword);
         spinnerNewPosition = findViewById(R.id.spinnerNewPosition);
         btnAddUser = findViewById(R.id.btnAddUser);
         btnLogout = findViewById(R.id.btnLogout);
@@ -70,8 +76,13 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void addNewUser() {
-        String login = etNewLogin.getText().toString().trim();
-        String password = etNewPassword.getText().toString().trim();
+        if (inputFieldsFragment == null) {
+            Toast.makeText(this, "Фрагмент не загружен", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String login = inputFieldsFragment.getLogin();
+        String password = inputFieldsFragment.getPassword();
         String position = spinnerNewPosition.getSelectedItem().toString();
 
         if (!validateLogin(login) || !validatePassword(password)) {
@@ -150,8 +161,10 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void clearInputFields() {
-        etNewLogin.setText("");
-        etNewPassword.setText("");
+        if (inputFieldsFragment != null) {
+            inputFieldsFragment.setLogin("");
+            inputFieldsFragment.setPassword("");
+        }
         spinnerNewPosition.setSelection(0);
     }
 
