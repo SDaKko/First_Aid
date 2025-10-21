@@ -74,6 +74,8 @@
     <string name="share_app">Поделиться приложением</string>
     <string name="contact_support">Связаться с поддержкой</string>
     <string name="back_to_main">Вернуться на главную</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
