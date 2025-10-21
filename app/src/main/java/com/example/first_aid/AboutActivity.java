@@ -36,7 +36,7 @@ public class AboutActivity extends BaseActivity {
         btnBack.setOnClickListener(v -> goBackWithResult());
     }
 
-    // еявное намерение - отправка email
+    // Неявное намерение - отправка email
     private void shareApp() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

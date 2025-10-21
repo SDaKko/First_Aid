@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.List;
+
 public class SettingsActivity extends BaseActivity {
     private String userName;
     private int userId;
@@ -27,7 +29,6 @@ public class SettingsActivity extends BaseActivity {
 
         databaseHelper = new DatabaseHelper(this);
 
-        // Получаем данные из родительской активности
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userName = extras.getString("user_name", "Пользователь");
@@ -58,16 +59,19 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void setupSpinner() {
-        String[] positions = getResources().getStringArray(R.array.positions_array);
+        // Получаем список должностей из БД
+        List<String> positions = databaseHelper.getAllPositions();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, positions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNewPosition.setAdapter(adapter);
 
+        // Устанавливаем текущую должность как выбранную
         if (currentUser != null && currentUser.getPosition() != null) {
             String currentPosition = currentUser.getPosition();
-            for (int i = 0; i < positions.length; i++) {
-                if (positions[i].equals(currentPosition)) {
+            for (int i = 0; i < positions.size(); i++) {
+                if (positions.get(i).equals(currentPosition)) {
                     spinnerNewPosition.setSelection(i);
                     break;
                 }

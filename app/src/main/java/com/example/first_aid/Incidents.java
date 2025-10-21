@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +26,25 @@ import java.util.List;
 
 public class Incidents extends BaseActivity {
 
-    List<Incident> incidentsList;
+    private List<Incident> incidentsList;
+    private DatabaseHelper databaseHelper;
+    private String userPosition;
+    private ListView lvIncidents;
+    private TextView tvEmptyState;
+    private IncidentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_incidents);
+
+        databaseHelper = new DatabaseHelper(this);
+
+        // Получаем должность пользователя из сессии
+        SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        userPosition = prefs.getString("user_position", "Универсальный");
+
+        EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -41,17 +54,70 @@ public class Incidents extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        incidentsList = new ArrayList<>();
+        initViews();
 
-        incidentsList.add(new Incident(getString(R.string.incident_1),
-                getString(R.string.cut_description), R.id.incident1));
-        incidentsList.add(new Incident(getString(R.string.incident_2),
-                getString(R.string.burn_description), R.id.incident2));
-        incidentsList.add(new Incident(getString(R.string.incident_3),
-                getString(R.string.fracture_description), R.id.incident3));
+        // Загружаем происшествия для текущей должности
+        loadIncidentsForPosition();
 
-        setupIncidentViews();
+        setupListView();
     }
+
+    private void initViews() {
+        lvIncidents = findViewById(R.id.lvIncidents);
+        tvEmptyState = findViewById(R.id.tvEmptyState);
+    }
+
+    private void loadIncidentsForPosition() {
+        incidentsList = databaseHelper.getIncidentsForPosition(userPosition);
+
+        // Обновляем заголовок с информацией о количестве
+        updateToolbarTitle();
+    }
+
+    private void updateToolbarTitle() {
+        TextView tvTitle = findViewById(R.id.textViewFirstAid2);
+        if (tvTitle != null) {
+            String title = getString(R.string.incidents) + " (" + incidentsList.size() + ")";
+            tvTitle.setText(title);
+        }
+    }
+
+    private void setupListView() {
+        if (incidentsList.isEmpty()) {
+            // Показываем сообщение о пустом списке
+            lvIncidents.setVisibility(View.GONE);
+            tvEmptyState.setVisibility(View.VISIBLE);
+            tvEmptyState.setText("Для должности \"" + userPosition + "\" нет доступных происшествий");
+        } else {
+            // Настраиваем адаптер и ListView
+            lvIncidents.setVisibility(View.VISIBLE);
+            tvEmptyState.setVisibility(View.GONE);
+
+            adapter = new IncidentAdapter(this, incidentsList);
+            lvIncidents.setAdapter(adapter);
+
+            // Обработчик клика по элементу списка
+            lvIncidents.setOnItemClickListener((parent, view, position, id) -> {
+                Incident selectedIncident = incidentsList.get(position);
+                openFirstAidActivity(selectedIncident);
+            });
+
+            // Дополнительные настройки ListView
+            lvIncidents.setDivider(getResources().getDrawable(android.R.drawable.divider_horizontal_bright));
+            lvIncidents.setDividerHeight(1);
+        }
+    }
+
+    private void openFirstAidActivity(Incident incident) {
+        Intent intent = new Intent(this, FirstAid.class);
+        intent.putExtra("incident_id", incident.getId());
+        intent.putExtra("incident_title", incident.getTitle());
+        startActivity(intent);
+
+        // Добавляем анимацию перехода
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

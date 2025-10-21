@@ -5,6 +5,7 @@ public class User {
     private String login;
     private String password;
     private String position;
+    private int positionId; // Новое поле для ID должности
 
     public User() {}
 
@@ -26,4 +27,7 @@ public class User {
 
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }
+
+    public int getPositionId() { return positionId; }
+    public void setPositionId(int positionId) { this.positionId = positionId; }
 }

@@ -99,6 +99,8 @@ public class MainActivity extends BaseActivity {
 
 
     private void setupNavigation() {
+        findViewById(R.id.incidentsButton).setOnClickListener(v -> goToIncidentsActivity());
+
         findViewById(R.id.settingsButton).setOnClickListener(v -> openSettings());
 
         findViewById(R.id.aboutButton).setOnClickListener(v -> openAbout());
@@ -197,7 +199,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void goToSecondActivity(View v) {
+    public void goToIncidentsActivity() {
         Intent intent = new Intent(this, Incidents.class);
         startActivity(intent);
     }

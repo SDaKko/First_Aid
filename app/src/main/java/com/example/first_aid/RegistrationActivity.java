@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class RegistrationActivity extends BaseActivity {
@@ -48,7 +50,9 @@ public class RegistrationActivity extends BaseActivity {
     }
 
     private void setupSpinner() {
-        String[] positions = getResources().getStringArray(R.array.positions_array);
+        // Получаем список должностей из БД
+        List<String> positions = databaseHelper.getAllPositions();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, positions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

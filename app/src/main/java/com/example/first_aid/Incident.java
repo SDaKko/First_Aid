@@ -1,35 +1,44 @@
 package com.example.first_aid;
 
 public class Incident {
+    private int id;
     private String title;
     private String description;
-    private int viewId;
+    private String imageUrl;
+    private String category;
+    private int viewId; // Добавляем поле для ID View
 
-    public Incident(String title, String description, int viewId) {
-        this.title = title;
-        this.description = description;
-        this.viewId = viewId;
-    }
+    public Incident() {}
 
     public Incident(String title, String description) {
         this.title = title;
         this.description = description;
-        this.viewId = -1; // или 0
     }
 
-    public String getTitle() {
-        return title;
+    public Incident(int id, String title, String description, String imageUrl, String category) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.category = category;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    // Геттеры и сеттеры
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public int getViewId() {
-        return viewId;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setViewId(int viewId) {
-        this.viewId = viewId;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public int getViewId() { return viewId; }
+    public void setViewId(int viewId) { this.viewId = viewId; }
 }

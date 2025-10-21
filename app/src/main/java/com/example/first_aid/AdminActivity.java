@@ -47,7 +47,9 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void setupSpinner() {
-        String[] positions = getResources().getStringArray(R.array.positions_array);
+        // Получаем список должностей из БД
+        List<String> positions = databaseHelper.getAllPositions();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, positions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -55,6 +57,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void loadUsers() {
+        // Используем новый метод getAllUsers()
         userList = databaseHelper.getAllUsers();
         userAdapter = new UserAdapter(userList);
         lvUsers.setAdapter(userAdapter);
@@ -191,6 +194,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void showDeleteConfirmation(User user) {
+        // Не позволяем удалить самого админа
         if ("admin".equals(user.getLogin())) {
             Toast.makeText(this, "Нельзя удалить администратора", Toast.LENGTH_SHORT).show();
             return;
@@ -205,9 +209,10 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void deleteUser(User user) {
+        // Используем новый метод deleteUser()
         if (databaseHelper.deleteUser(user.getLogin())) {
             Toast.makeText(this, "Пользователь удален", Toast.LENGTH_SHORT).show();
-            loadUsers();
+            loadUsers(); // Обновляем список
         } else {
             Toast.makeText(this, "Ошибка удаления", Toast.LENGTH_SHORT).show();
         }
