@@ -1,14 +1,18 @@
 package com.example.first_aid;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +40,9 @@ public class Incidents extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        getWindow().setWindowAnimations(0);
+
         setContentView(R.layout.activity_incidents);
 
         databaseHelper = new DatabaseHelper(this);
@@ -115,8 +122,76 @@ public class Incidents extends BaseActivity {
         startActivity(intent);
 
         // Добавляем анимацию перехода
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        // Для API 16+
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+//            ActivityOptions options = ActivityOptions.makeCustomAnimation(this,
+//                    R.anim.zoom_in, R.anim.zoom_out);
+//            startActivity(intent, options.toBundle());
+//        } else {
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+//        }
     }
+
+//    private void openFirstAidActivity(Incident incident) {
+//        Log.d("ANIM_DEBUG", "=== STARTING ACTIVITY WITH ACTIVITY OPTIONS ===");
+//
+//        Intent intent = new Intent(this, FirstAid.class);
+//        intent.putExtra("incident_id", incident.getId());
+//        intent.putExtra("incident_title", incident.getTitle());
+//
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+//            ActivityOptions options = ActivityOptions.makeCustomAnimation(
+//                    this,
+//                    R.anim.zoom_in,
+//                    R.anim.zoom_out
+//            );
+//            startActivity(intent, options.toBundle());
+//            Log.d("ANIM_DEBUG", "Activity started with ActivityOptions");
+//        } else {
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+//            Log.d("ANIM_DEBUG", "Activity started with overridePendingTransition");
+//        }
+//    }
+
+//    private void openFirstAidActivity(Incident incident) {
+//        Log.d("ANIM_DEBUG", "=== STARTING FirstAid ACTIVITY ===");
+//
+//        Intent intent = new Intent(this, FirstAid.class);
+//        intent.putExtra("incident_id", incident.getId());
+//        intent.putExtra("incident_title", incident.getTitle());
+//
+//        // Для Android 5.0+ используем ActivityOptions
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+//            ActivityOptions options = ActivityOptions.makeCustomAnimation(
+//                    this,
+//                    R.anim.zoom_in,    // анимация входа для FirstAid
+//                    R.anim.zoom_out    // анимация выхода для Incidents
+//            );
+//            startActivity(intent, options.toBundle());
+//            Log.d("ANIM_DEBUG", "Started with ActivityOptions (Lollipop+)");
+//        }
+//        // Для Android 4.1-4.4 используем другой метод
+//        else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+//            ActivityOptions options = ActivityOptions.makeCustomAnimation(
+//                    this,
+//                    R.anim.zoom_in,
+//                    R.anim.zoom_out
+//            );
+//            startActivity(intent, options.toBundle());
+//            Log.d("ANIM_DEBUG", "Started with ActivityOptions (JellyBean)");
+//        }
+//        // Для старых версий Android
+//        else {
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+//            Log.d("ANIM_DEBUG", "Started with overridePendingTransition");
+//        }
+//    }
+
 
 
     @Override

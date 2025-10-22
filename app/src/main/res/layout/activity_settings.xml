@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="Настройки"
+            android:text="@string/settings"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Информация о пользователе"
+            android:text="@string/info_about_user"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Обновление профиля"
+                android:text="@string/updating_profile"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -56,7 +56,7 @@
                     android:id="@+id/etNewPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Новый пароль (оставьте пустым чтобы не менять)"
+                    android:hint="@string/new_profile_input"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -65,21 +65,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="Выберите новую должность:"
+                android:text="@string/choose_new_position"
                 android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/spinnerNewPosition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:minHeight="48dp" />
 
             <Button
                 android:id="@+id/btnUpdateProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Обновить профиль" />
+                android:text="@string/update_profile"
+                android:textColor="@color/white_text" />
 
         </LinearLayout>
 
@@ -88,13 +90,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Связаться с поддержкой" />
+            android:text="@string/link_with_support"
+            android:textColor="@color/white_text" />
 
         <Button
             android:id="@+id/btnBackToMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Вернуться на главную" />
+            android:text="@string/back_to_main"
+            android:textColor="@color/white_text" />
 
     </LinearLayout>
 </ScrollView>

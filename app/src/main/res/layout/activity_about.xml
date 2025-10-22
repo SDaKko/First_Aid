@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="О приложении"
+        android:text="@string/about_app"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="First Aid - приложение первой помощи"
+        android:text="@string/about_first_aid"
         android:textSize="16sp" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:text="Версия: 1.0"
+        android:text="@string/version"
         android:textSize="14sp" />
 
     <Button
@@ -38,12 +38,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Поделиться приложением" />
+        android:text="@string/share_app"
+        android:textColor="@color/white_text" />
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Назад" />
+        android:text="@string/back"
+        android:textColor="@color/white_text" />
 
 </LinearLayout>

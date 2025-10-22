@@ -38,10 +38,10 @@ public class SettingsActivity extends BaseActivity {
 
             TextView tvUserInfo = findViewById(R.id.tvUserInfo);
             if (currentUser != null) {
-                tvUserInfo.setText("Пользователь: " + currentUser.getLogin() +
-                        "\nДолжность: " + currentUser.getPosition());
+                tvUserInfo.setText(getResources().getText(R.string.user) + " " + currentUser.getLogin() +
+                        "\n" + getResources().getText(R.string.position) + " " +  currentUser.getPosition());
             } else {
-                tvUserInfo.setText("Пользователь: " + userName);
+                tvUserInfo.setText(getResources().getText(R.string.user) + " " + userName);
             }
         }
 

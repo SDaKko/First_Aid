@@ -25,9 +25,10 @@
             android:id="@+id/tvUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Пользователь: "
+            android:text="@string/user"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -35,7 +36,8 @@
             android:id="@+id/tvUserPosition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Должность: "
+            android:layout_marginStart="10dp"
+            android:text="@string/position"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -53,8 +55,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:text="Перейти с списку происшествий"
-            android:textColor="@color/white"
+            android:text="@string/go_to_incidents"
+            android:textColor="@color/white_text"
             android:textSize="18sp" />
 
         <Button
@@ -64,8 +66,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Настройки"
-            android:textColor="@color/white"
+            android:text="@string/settings"
+            android:textColor="@color/white_text"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -87,7 +89,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:contentInsetStart="0dp">
@@ -100,7 +102,7 @@
                 android:gravity="center"
                 android:text="@string/industries_list"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/white_text"
                 android:textSize="26sp" />
 
             <ImageButton
@@ -109,6 +111,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@string/about_app"
                 app:srcCompat="@android:drawable/ic_dialog_info" />
 
         </androidx.appcompat.widget.Toolbar>

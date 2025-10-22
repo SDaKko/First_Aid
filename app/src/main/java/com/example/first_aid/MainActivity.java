@@ -80,19 +80,19 @@ public class MainActivity extends BaseActivity {
         String position = userSession.getString("user_position", "");
 
         if (tvUserName != null) {
-            tvUserName.setText("Пользователь: " + login);
+            tvUserName.setText(getResources().getText(R.string.user) + " " + login);
         }
         if (tvUserPosition != null) {
-            tvUserPosition.setText("Должность: " + position);
+            tvUserPosition.setText(getResources().getText(R.string.position) + " " + position);
         }
     }
 
     private void displayUserInfo(User user) {
         if (tvUserName != null) {
-            tvUserName.setText("Пользователь: " + user.getLogin());
+            tvUserName.setText(getResources().getText(R.string.user) + " " + user.getLogin());
         }
         if (tvUserPosition != null) {
-            tvUserPosition.setText("Должность: " + user.getPosition());
+            tvUserPosition.setText(getResources().getText(R.string.position) + " " + user.getPosition());
         }
     }
 

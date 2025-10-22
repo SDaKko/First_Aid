@@ -6,4 +6,21 @@
     </style>
 
     <style name="Theme.First_Aid" parent="Base.Theme.First_Aid" />
+
+    <style name="AppTheme.NoAnimations" parent="Base.Theme.First_Aid">
+        <!-- НЕ отключаем анимации, а указываем свои -->
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+<!--        <item name="android:activityOpenEnterAnimation">@anim/zoom_in</item>-->
+<!--        <item name="android:activityOpenExitAnimation">@anim/zoom_out</item>-->
+<!--        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>-->
+<!--        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
+
+        <item name="android:activityOpenEnterAnimation">@anim/zoom_in</item>
+<!--        <item name="android:activityOpenExitAnimation">@anim/zoom_out</item>-->
+<!--        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
 </resources>

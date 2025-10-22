@@ -20,7 +20,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:contentInsetStart="0dp">
@@ -43,8 +43,8 @@
                 android:padding="5dp"
                 android:text="@string/incidents"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textColor="@color/white_text"
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -56,6 +56,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +67,7 @@
         android:id="@+id/tvEmptyState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Нет доступных происшествий для вашей должности"
+        android:text="@string/no_available_incidents"
         android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

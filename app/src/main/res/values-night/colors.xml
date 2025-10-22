@@ -3,9 +3,10 @@
 
     <color name="black">#FFFFFFFF</color>
     <color name="white">#2C2C2C</color>
-
-    <color name="common_background_toolbar">#4842FF</color>
-    <color name="blue_text">#4842FF</color>
-    <color name="blue">#4842FF</color>
+    <color name="white_text">#000000</color>
+    <color name="gray_text">#DCDCDC</color>
+    <color name="common_background_toolbar">#7A61B6</color>
+    <color name="blue_text">#7A61B6</color>
+    <color name="blue">#7A61B6</color>
 
 </resources>

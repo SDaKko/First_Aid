@@ -22,7 +22,7 @@ public class AboutActivity extends BaseActivity {
             userPosition = extras.getString("user_position", "Универсальная");
 
             TextView tvAppInfo = findViewById(R.id.tvAppInfo);
-            tvAppInfo.setText("First Aid - приложение первой помощи\n\nДобро пожаловать, " +
+            tvAppInfo.setText(getResources().getText(R.string.about_first_aid) + "\n\n" + getResources().getText(R.string.welcome) + " " +
                     userName + " (" + userPosition + ")!");
         }
 

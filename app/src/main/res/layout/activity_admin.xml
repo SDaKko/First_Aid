@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="Панель администратора"
+        android:text="@string/admin_panel"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Добавить нового пользователя"
+            android:text="@string/add_new_user"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green_button"
-            android:text="Добавить пользователя"
+            android:text="@string/add_user"
             android:textColor="@color/white" />
 
     </LinearLayout>
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Список пользователей"
+        android:text="@string/users_list"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -84,7 +84,7 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/blue_button"
-            android:text="Происшествия"
+            android:text="@string/incidents"
             android:textColor="@color/white" />
 
         <Button

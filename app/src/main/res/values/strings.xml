@@ -74,8 +74,38 @@
     <string name="share_app">Поделиться приложением</string>
     <string name="contact_support">Связаться с поддержкой</string>
     <string name="back_to_main">Вернуться на главную</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_first_aid">First Aid - приложение первой помощи</string>
+    <string name="version">Версия: 1.0</string>
+
+    <string name="go_to_incidents">Перейти с списку происшествий</string>
+    <string name="position">Должность: </string>
+    <string name="user">Пользователь: </string>
+
+    <string name="no_available_incidents">Нет доступных происшествий для вашей должности</string>
+
+    <string name="admin_panels">Панель администратора</string>
+
+    <string name="name_incident">Название происшествия</string>
+    <string name="first_aid_description">Описание первой помощи...</string>
+    <string name="back_to_list">Назад к списку</string>
+    <string name="choose_position">Выберите должность</string>
+
+    <string name="info_about_user">Информация о пользователе</string>
+    <string name="updating_profile">Обновление профиля</string>
+    <string name="new_profile_input">Новый пароль (оставьте пустым чтобы не менять)</string>
+    <string name="choose_new_position">Выберите новую должность:</string>
+    <string name="update_profile">Обновить профиль</string>
+    <string name="link_with_support">Связаться с поддержкой</string>
+
+    <string name="category">Категория</string>
+    <string name="arrow">&gt;</string>
+
+    <string name="icon_picture">Изображение</string>
+
+    <string name="simple_position">Должность</string>
+    <string name="delete">Удалить</string>
+
+    <string name="welcome">Добро пожаловать, </string>
 
 
 </resources>

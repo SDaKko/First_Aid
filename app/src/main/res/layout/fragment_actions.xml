@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <Button
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/login_button"
-        android:textColor="@color/white"
+        android:textColor="@color/white_text"
         android:textSize="18sp" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
+        android:minHeight="48dp"
         android:text="@string/dont_have_account_register"
         android:textColor="@color/blue" />
 

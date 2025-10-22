@@ -16,7 +16,7 @@
             android:id="@+id/tvLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Логин"
+            android:text="@string/login"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -24,7 +24,7 @@
             android:id="@+id/tvPosition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Должность"
+            android:text="@string/simple_position"
             android:textSize="14sp"
             android:textColor="#666" />
 
@@ -34,8 +34,8 @@
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Удалить"
         android:backgroundTint="#F44336"
-        android:textColor="#fff" />
+        android:text="@string/delete"
+        android:textColor="@color/white_text" />
 
 </LinearLayout>
