@@ -16,7 +16,6 @@
         android:src="@android:drawable/ic_dialog_alert"
         android:layout_marginEnd="16dp" />
 
-    <!-- Текстовая информация -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,7 +42,6 @@
 
     </LinearLayout>
 
-    <!-- Простая стрелка текстом -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

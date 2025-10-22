@@ -18,10 +18,8 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "FirstAidApp.db";
     private static final int DATABASE_VERSION = 3;
-    private final Context context;
-    private String DB_PATH;
 
-    // Названия таблиц и колонок
+    // Названия таблиц и полей
     private static final String TABLE_POSITIONS = "positions";
     private static final String TABLE_USERS = "users";
     private static final String TABLE_INCIDENTS = "incidents";
@@ -43,21 +41,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
-        DB_PATH = context.getDatabasePath(DATABASE_NAME).getPath();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Создаем таблицы через код
         createTables(db);
-        // Заполняем начальными данными
         addInitialData(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Удаляем старые таблицы и создаем новые
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION_INCIDENTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INCIDENTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
@@ -65,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // === МЕТОДЫ СОЗДАНИЯ ТАБЛИЦ ===
+    // Создание таблиц
 
     private void createTables(SQLiteDatabase db) {
         createPositionsTable(db);
@@ -111,7 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_POSITION_INCIDENTS_TABLE);
     }
 
-    // === МЕТОДЫ ДОБАВЛЕНИЯ НАЧАЛЬНЫХ ДАННЫХ ===
+    // Добавление данных
 
     private void addInitialData(SQLiteDatabase db) {
         addInitialPositions(db);
@@ -307,28 +301,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 // Преподаватель (id: 1)
                 {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 7}, {1, 8}, {1, 9}, {1, 10}, {1, 11},
                 {1, 12}, {1, 15}, {1, 16}, {1, 19},
-                // НОВЫЕ СВЯЗИ ДЛЯ ПРЕПОДАВАТЕЛЯ
+                // Связи для преподавателя
                 {1, 21}, {1, 22}, {1, 23}, {1, 24}, {1, 33}, {1, 34},
 
                 // Врач (id: 2)
                 {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 8}, {2, 9}, {2, 10}, {2, 12}, {2, 18}, {2, 19},
-                // НОВЫЕ СВЯЗИ ДЛЯ ВРАЧА
+                // Связи для врача
                 {2, 21}, {2, 22}, {2, 24}, {2, 33}, {2, 34},
 
                 // Водитель (id: 3)
                 {3, 1}, {3, 2}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {3, 10}, {3, 12}, {3, 17}, {3, 19},
-                // НОВЫЕ СВЯЗИ ДЛЯ ВОДИТЕЛЯ
+                // Связи для водителя
                 {3, 25}, {3, 26}, {3, 27}, {3, 28}, {3, 33}, {3, 34},
 
                 // Мастер ПК (id: 4)
                 {4, 1}, {4, 2}, {4, 6}, {4, 7}, {4, 13}, {4, 14}, {4, 19}, {4, 20},
-                // НОВЫЕ СВЯЗИ ДЛЯ МАСТЕРА ПК
+                // Связи для мастера
                 {4, 29}, {4, 30}, {4, 31}, {4, 32}, {4, 33}, {4, 34},
 
                 // Универсальный (id: 5)
                 {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 5}, {5, 6}, {5, 7}, {5, 8}, {5, 9}, {5, 10},
                 {5, 11}, {5, 12}, {5, 13}, {5, 14}, {5, 15}, {5, 16}, {5, 17}, {5, 18}, {5, 19}, {5, 20},
-                // НОВЫЕ СВЯЗИ ДЛЯ УНИВЕРСАЛЬНОГО
+                // Универсальные связи
                 {5, 21}, {5, 22}, {5, 23}, {5, 24}, {5, 25}, {5, 26}, {5, 27}, {5, 28},
                 {5, 29}, {5, 30}, {5, 31}, {5, 32}, {5, 33}, {5, 34}
         };
@@ -341,7 +335,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // === МЕТОДЫ ДЛЯ РАБОТЫ С ПОЛЬЗОВАТЕЛЯМИ ===
+    // Работа с пользователями
 
     public boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -434,13 +428,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    // === МЕТОДЫ ДЛЯ РАБОТЫ С ПРОИСШЕСТВИЯМИ ===
+    // Работа с происшествиями
 
     public List<Incident> getIncidentsForPosition(String positionName) {
         List<Incident> incidentList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // ИСПРАВЛЕННЫЙ ЗАПРОС - добавлены пробелы после JOIN условий
         String query = "SELECT i." + COLUMN_INCIDENT_ID + ", i." + COLUMN_TITLE + ", " +
                 "i." + COLUMN_DESCRIPTION + ", i." + COLUMN_IMAGE_URL + ", i." + COLUMN_CATEGORY +
                 " FROM " + TABLE_INCIDENTS + " i " +
@@ -449,8 +442,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "WHERE p." + COLUMN_POSITION_NAME + " = ? " +
                 "ORDER BY i." + COLUMN_TITLE;
 
-        Log.d("DatabaseHelper", "Executing query: " + query);
-        Log.d("DatabaseHelper", "Position name: " + positionName);
 
         Cursor cursor = db.rawQuery(query, new String[]{positionName});
 
@@ -618,7 +609,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    // Проверка является ли пользователь админом
+    // Проверка, является ли пользователь админом
     public boolean isAdmin(String login) {
         SQLiteDatabase db = this.getReadableDatabase();
 

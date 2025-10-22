@@ -50,7 +50,6 @@
 
     </LinearLayout>
 
-    <!-- ListView для отображения происшествий -->
     <ListView
         android:id="@+id/lvIncidents"
         android:layout_width="0dp"
@@ -62,7 +61,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_toolbar" />
 
-    <!-- TextView для пустого состояния -->
     <TextView
         android:id="@+id/tvEmptyState"
         android:layout_width="wrap_content"

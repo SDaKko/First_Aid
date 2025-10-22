@@ -11,10 +11,6 @@ public class InputFieldsFragment extends Fragment {
 
     private TextInputEditText etLogin, etPassword;
 
-    public InputFieldsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,7 +24,6 @@ public class InputFieldsFragment extends Fragment {
         etPassword = view.findViewById(R.id.etPassword);
     }
 
-    // Геттеры для доступа к данным из активности
     public String getLogin() {
         return etLogin != null ? etLogin.getText().toString().trim() : "";
     }
@@ -37,7 +32,6 @@ public class InputFieldsFragment extends Fragment {
         return etPassword != null ? etPassword.getText().toString().trim() : "";
     }
 
-    // Сеттеры для установки значений
     public void setLogin(String login) {
         if (etLogin != null) {
             etLogin.setText(login);
@@ -50,9 +44,4 @@ public class InputFieldsFragment extends Fragment {
         }
     }
 
-    // Методы для очистки полей
-    public void clearFields() {
-        if (etLogin != null) etLogin.setText("");
-        if (etPassword != null) etPassword.setText("");
-    }
 }

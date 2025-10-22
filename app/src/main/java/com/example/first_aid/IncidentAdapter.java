@@ -43,14 +43,12 @@ public class IncidentAdapter extends ArrayAdapter<Incident> {
 
         Incident incident = incidents.get(position);
 
-        // Устанавливаем данные
         holder.tvTitle.setText(incident.getTitle());
         holder.tvCategory.setText(getCategoryDisplayName(incident.getCategory()));
 
         // Устанавливаем иконку в зависимости от категории
         holder.ivIcon.setImageResource(getIconForCategory(incident.getCategory()));
 
-        // ВАЖНО: Добавляем обработчик клика на весь элемент
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +99,6 @@ public class IncidentAdapter extends ArrayAdapter<Incident> {
         }
     }
 
-    // ViewHolder для оптимизации
     private static class ViewHolder {
         ImageView ivIcon;
         TextView tvTitle;

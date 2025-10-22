@@ -31,13 +31,8 @@ public class FirstAid extends BaseActivity {
             incidentTitle = extras.getString("incident_title", "");
         }
 
-        initViews();
         loadIncidentDetails();
         setupClickListeners();
-    }
-
-    private void initViews() {
-        Button btnBack = findViewById(R.id.btnBack);
     }
 
     private void loadIncidentDetails() {
@@ -61,10 +56,8 @@ public class FirstAid extends BaseActivity {
         TextView tvDescription = findViewById(R.id.tvIncidentDescription);
         ImageView ivImage = findViewById(R.id.ivIncidentImage);
 
-        // Устанавливаем заголовок
         tvTitle.setText(incident.getTitle());
 
-        // Устанавливаем описание
         tvDescription.setText(incident.getDescription());
 
         // Загружаем изображение из assets
@@ -78,7 +71,7 @@ public class FirstAid extends BaseActivity {
 
     private void loadImageFromAssets(ImageView imageView, String imageName) {
         try {
-            // Открываем поток напрямую из assets (без папки images)
+            // Открываем поток напрямую из assets
             InputStream inputStream = getAssets().open(imageName);
 
             // Создаем Bitmap из InputStream

@@ -2,6 +2,7 @@ package com.example.first_aid;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,22 @@ public class AdminActivity extends AppCompatActivity {
                 .findFragmentById(R.id.adminLoginFieldsFragment);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateLanguageIfNeeded();
+    }
+
+    private void updateLanguageIfNeeded() {
+        String currentLanguage = getResources().getConfiguration().locale.getLanguage();
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        String savedLanguage = prefs.getString("app_language", "ru");
+
+        if (!currentLanguage.equals(savedLanguage)) {
+            recreate();
+        }
+    }
+
     private void initViews() {
         lvUsers = findViewById(R.id.lvUsers);
         spinnerNewPosition = findViewById(R.id.spinnerNewPosition);
@@ -63,7 +80,6 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void loadUsers() {
-        // Используем новый метод getAllUsers()
         userList = databaseHelper.getAllUsers();
         userAdapter = new UserAdapter(userList);
         lvUsers.setAdapter(userAdapter);
@@ -222,7 +238,6 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void deleteUser(User user) {
-        // Используем новый метод deleteUser()
         if (databaseHelper.deleteUser(user.getLogin())) {
             Toast.makeText(this, "Пользователь удален", Toast.LENGTH_SHORT).show();
             loadUsers(); // Обновляем список

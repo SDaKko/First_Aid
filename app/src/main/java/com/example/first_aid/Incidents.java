@@ -41,13 +41,10 @@ public class Incidents extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        getWindow().setWindowAnimations(0);
-
         setContentView(R.layout.activity_incidents);
 
         databaseHelper = new DatabaseHelper(this);
 
-        // Получаем должность пользователя из сессии
         SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
         userPosition = prefs.getString("user_position", "Универсальный");
 
@@ -77,21 +74,10 @@ public class Incidents extends BaseActivity {
     private void loadIncidentsForPosition() {
         incidentsList = databaseHelper.getIncidentsForPosition(userPosition);
 
-        // Обновляем заголовок с информацией о количестве
-//        updateToolbarTitle();
-    }
-
-    private void updateToolbarTitle() {
-        TextView tvTitle = findViewById(R.id.textViewFirstAid2);
-        if (tvTitle != null) {
-            String title = getString(R.string.incidents) + " (" + incidentsList.size() + ")";
-            tvTitle.setText(title);
-        }
     }
 
     private void setupListView() {
         if (incidentsList.isEmpty()) {
-            // Показываем сообщение о пустом списке
             lvIncidents.setVisibility(View.GONE);
             tvEmptyState.setVisibility(View.VISIBLE);
             tvEmptyState.setText("Для должности \"" + userPosition + "\" нет доступных происшествий");
@@ -103,13 +89,11 @@ public class Incidents extends BaseActivity {
             adapter = new IncidentAdapter(this, incidentsList);
             lvIncidents.setAdapter(adapter);
 
-            // Обработчик клика по элементу списка
             lvIncidents.setOnItemClickListener((parent, view, position, id) -> {
                 Incident selectedIncident = incidentsList.get(position);
                 openFirstAidActivity(selectedIncident);
             });
 
-            // Дополнительные настройки ListView
             lvIncidents.setDivider(getResources().getDrawable(android.R.drawable.divider_horizontal_bright));
             lvIncidents.setDividerHeight(1);
         }
@@ -121,76 +105,7 @@ public class Incidents extends BaseActivity {
         intent.putExtra("incident_title", incident.getTitle());
         startActivity(intent);
 
-        // Добавляем анимацию перехода
-//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//        overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-        // Для API 16+
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-//            ActivityOptions options = ActivityOptions.makeCustomAnimation(this,
-//                    R.anim.zoom_in, R.anim.zoom_out);
-//            startActivity(intent, options.toBundle());
-//        } else {
-//            startActivity(intent);
-//            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-//        }
     }
-
-//    private void openFirstAidActivity(Incident incident) {
-//        Log.d("ANIM_DEBUG", "=== STARTING ACTIVITY WITH ACTIVITY OPTIONS ===");
-//
-//        Intent intent = new Intent(this, FirstAid.class);
-//        intent.putExtra("incident_id", incident.getId());
-//        intent.putExtra("incident_title", incident.getTitle());
-//
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-//            ActivityOptions options = ActivityOptions.makeCustomAnimation(
-//                    this,
-//                    R.anim.zoom_in,
-//                    R.anim.zoom_out
-//            );
-//            startActivity(intent, options.toBundle());
-//            Log.d("ANIM_DEBUG", "Activity started with ActivityOptions");
-//        } else {
-//            startActivity(intent);
-//            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-//            Log.d("ANIM_DEBUG", "Activity started with overridePendingTransition");
-//        }
-//    }
-
-//    private void openFirstAidActivity(Incident incident) {
-//        Log.d("ANIM_DEBUG", "=== STARTING FirstAid ACTIVITY ===");
-//
-//        Intent intent = new Intent(this, FirstAid.class);
-//        intent.putExtra("incident_id", incident.getId());
-//        intent.putExtra("incident_title", incident.getTitle());
-//
-//        // Для Android 5.0+ используем ActivityOptions
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//            ActivityOptions options = ActivityOptions.makeCustomAnimation(
-//                    this,
-//                    R.anim.zoom_in,    // анимация входа для FirstAid
-//                    R.anim.zoom_out    // анимация выхода для Incidents
-//            );
-//            startActivity(intent, options.toBundle());
-//            Log.d("ANIM_DEBUG", "Started with ActivityOptions (Lollipop+)");
-//        }
-//        // Для Android 4.1-4.4 используем другой метод
-//        else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-//            ActivityOptions options = ActivityOptions.makeCustomAnimation(
-//                    this,
-//                    R.anim.zoom_in,
-//                    R.anim.zoom_out
-//            );
-//            startActivity(intent, options.toBundle());
-//            Log.d("ANIM_DEBUG", "Started with ActivityOptions (JellyBean)");
-//        }
-//        // Для старых версий Android
-//        else {
-//            startActivity(intent);
-//            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-//            Log.d("ANIM_DEBUG", "Started with overridePendingTransition");
-//        }
-//    }
 
 
 
@@ -245,26 +160,6 @@ public class Incidents extends BaseActivity {
 
     public void goToFirstActivity(View v){
         finish();
-    }
-
-    private void setupIncidentViews() {
-        for (Incident incident : incidentsList) {
-            TextView textView = findViewById(incident.getViewId());
-
-            if (textView != null) {
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showInfo(incident.getDescription());
-                    }
-                });
-            }
-        }
-
-    }
-
-    private void showInfo(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
     private void performLogout() {

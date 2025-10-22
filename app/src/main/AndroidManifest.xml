@@ -34,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".Incidents"
-            android:theme="@style/AppTheme.NoAnimations"
+            android:theme="@style/AppTheme.WithAnimations"
             android:exported="false" />
         <activity
             android:name=".FirstAid"
